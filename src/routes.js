@@ -1,11 +1,8 @@
 import Index from "./views/Index";
 import Orders from "./views/orders";
-import Profile from "./views/examples/Profile";
-import Maps from "./views/examples/Maps";
-import Register from "./views/examples/Register";
-import Login from "./views/examples/Login";
-import Tables from "./views/examples/Tables";
-import Icons from "./views/examples/Icons";
+import Settings from "./views/settings"
+import Register from "./views/Auth/Register";
+import Login from "./views/Auth/Login";
 
 var routes = [
   {
@@ -20,6 +17,13 @@ var routes = [
     name: "Orders",
     icon: "ni ni-tv-2 text-primary",
     component: Orders,
+    layout: "/admin"
+  },
+  {
+    path: "/admin-settings",
+    name: "Setup",
+    icon: "ni ni-tv-2 text-primary",
+    component: Settings,
     layout: "/admin"
   },
   // {

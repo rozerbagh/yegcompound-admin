@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import {
   Button,
   Card,
@@ -12,8 +15,18 @@ import {
   Row,
   Col
 } from "reactstrap";
-import { Link } from "react-router-dom"
+import { login } from "../../store/authSlice";
+
 const Login = () => {
+  const [loginForm, setLoginForm] = useState({
+    email: "",
+    password: "",
+  })
+  const dispatch = useDispatch();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login(loginForm.email, loginForm.password));
+  }
   return (
     <>
       <Col lg="5" md="7">
@@ -60,7 +73,7 @@ const Login = () => {
             <div className="text-center text-muted mb-4">
               <small>Or sign in with credentials</small>
             </div>
-            <Form role="form">
+            <Form role="form" onSubmit={handleSubmit}>
               <FormGroup className="mb-3">
                 <InputGroup className="input-group-alternative">
                   <InputGroupAddon addonType="prepend">
@@ -72,6 +85,8 @@ const Login = () => {
                     placeholder="Email"
                     type="email"
                     autoComplete="new-email"
+                    value={loginForm.email}
+                    onChange={(e) => setLoginForm({ email: e.target.value })}
                   />
                 </InputGroup>
               </FormGroup>
@@ -86,6 +101,8 @@ const Login = () => {
                     placeholder="Password"
                     type="password"
                     autoComplete="new-password"
+                    value={loginForm.password}
+                    onChange={(e) => setLoginForm({ password: e.target.value })}
                   />
                 </InputGroup>
               </FormGroup>

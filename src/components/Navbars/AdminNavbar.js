@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux"
+import { logout } from "../../store/authSlice";
 // reactstrap components
 import {
   DropdownMenu,
@@ -18,6 +20,7 @@ import {
 } from "reactstrap";
 
 const AdminNavbar = (props) => {
+  const dispatch = useDispatch()
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -78,7 +81,10 @@ const AdminNavbar = (props) => {
                   <span>Support</span>
                 </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+                <DropdownItem href="#pablo" onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(logout())
+                }}>
                   <i className="ni ni-user-run" />
                   <span>Logout</span>
                 </DropdownItem>

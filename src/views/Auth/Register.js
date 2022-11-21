@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   Button,
   Card,
@@ -138,6 +139,17 @@ const Register = () => {
             </Form>
           </CardBody>
         </Card>
+        <Row className="mt-3">
+          <Col xs="6">
+            <a
+              className="text-light"
+              href="/auth/login"
+              onClick={(e) => e.preventDefault()}
+            >
+              <small>Already have account? Login</small>
+            </a>
+          </Col>
+        </Row>
       </Col>
     </>
   );

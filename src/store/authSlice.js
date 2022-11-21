@@ -8,16 +8,21 @@ const initialState = {
     isLoggedOut: false,
     isError: false,
     errorMessage: "",
-    user: JSON.parse(localStorage.getItem(`user`)) || {},
+    user: JSON.parse(localStorage.getItem(`user`)) || null,
+    token: null,
 
     // forget password
     isEmailSent: false,
     successMessage: "",
 };
 
-export const login = createAsyncThunk(`login`, async (credentials) => {
+export const login = createAsyncThunk(`login`, async (body, thunkAPI) => {
+    console.log(body.email, body.password);
     try {
-        const res = await api.post(`/user/login`, credentials);
+        const res = await api.post(`/user/login`, {
+            "email": body.email,
+            "password": body.password
+        });
         const { data } = res;
         return data;
     } catch (error) {
@@ -49,8 +54,41 @@ const authSlice = createSlice({
             state.isLoggedOut = true;
             state.isError = false;
             state.errorMessage = "";
-            state.user = {};
+            state.user = null;
+            state.token = null;
         },
+        checkAuthState: (state, action) => {
+            const user = JSON.parse(localStorage.getItem('user'));
+            const token = localStorage.getItem(`admintoken`);
+            if (token !== null && token != undefined && token != "") {
+                if (user.role === 1) {
+                    state.isLoggedIn = true;
+                    state.user = user;
+                    state.isLoggedOut = false;
+                    state.isError = false;
+                    state.errorMessage = "";
+                } else {
+                    localStorage.removeItem(`admintoken`);
+                    localStorage.removeItem(`user`);
+                    state.isLoggedIn = false;
+                    state.isLoggedOut = true;
+                    state.isError = false;
+                    state.errorMessage = "not an admin";
+                    state.user = null;
+                    state.token = null;
+                }
+            } else {
+                localStorage.removeItem(`admintoken`);
+                localStorage.removeItem(`user`);
+                state.isLoggedIn = false;
+                state.isLoggedOut = true;
+                state.isError = false;
+                state.errorMessage = "";
+                state.user = null;
+                state.token = null;
+            }
+        }
+
     },
     extraReducers: {
         // login
@@ -65,22 +103,22 @@ const authSlice = createSlice({
             state.user = {};
         },
         [login.fulfilled]: (state, action) => {
-            const { status } = action?.payload;
+            const { statuscode } = action?.payload;
             state.isLoading = false;
-            if (status === 200) {
-                const { user, accessToken } = action?.payload;
-                localStorage.setItem(`admintoken`, accessToken);
-                localStorage.setItem(`user`, JSON.stringify(user));
-
-                state.isLoggedIn = true;
-                state.user = user;
-            }
-            if (status === 400) {
+            if (statuscode === 200) {
+                const { token, ...rest } = action?.payload;
+                if (rest.role === 1) {
+                    localStorage.setItem(`admintoken`, token);
+                    localStorage.setItem(`user`, JSON.stringify(action?.payload));
+                    state.isLoggedIn = true;
+                    state.user = action?.payload;
+                }
+            } else {
                 localStorage.removeItem(`admintoken`);
                 const { message } = action?.payload;
-
                 state.isError = true;
                 state.errorMessage = message;
+                state.isLoggedIn = false;
             }
         },
         [login.rejected]: (state) => {
@@ -117,6 +155,6 @@ const authSlice = createSlice({
     },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, checkAuthState } = authSlice.actions;
 
 export default authSlice.reducer;

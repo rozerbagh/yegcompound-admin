@@ -3,9 +3,9 @@ import { useLocation, Route, Switch, Redirect } from "react-router-dom";
 // reactstrap components
 import { Container } from "reactstrap";
 // core components
-import AdminNavbar from "components/Navbars/AdminNavbar.js";
-import AdminFooter from "components/Footers/AdminFooter.js";
-import Sidebar from "components/Sidebar/Sidebar.js";
+import AdminNavbar from "../components/Navbars/AdminNavbar";
+import AdminFooter from "../components/Footers/AdminFooter";
+import Sidebar from "../components/Sidebar/Sidebar";
 
 import routes from "../routes.js";
 

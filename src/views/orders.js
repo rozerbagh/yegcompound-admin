@@ -23,10 +23,11 @@ import {
 // core components
 import Header from "../components/Headers/Header";
 import { getAllOrders } from "../server"
+import { api } from "../utils/AxiosIstance";
 const Orders = () => {
     const [orders, setOrders] = useState([]);
     const fetchAllorders = () => {
-        axios.get(getAllOrders).then(({ data }) => {
+        api.get('/app/order/all').then(({ data }) => {
             setOrders(data.data)
         }).catch(error => {
 

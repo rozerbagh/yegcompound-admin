@@ -25,7 +25,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login(loginForm.email, loginForm.password));
+    dispatch(login({ email: loginForm.email, password: loginForm.password }));
   }
   return (
     <>
@@ -86,7 +86,7 @@ const Login = () => {
                     type="email"
                     autoComplete="new-email"
                     value={loginForm.email}
-                    onChange={(e) => setLoginForm({ email: e.target.value })}
+                    onChange={(e) => setLoginForm(ps => ({ ...ps, email: e.target.value }))}
                   />
                 </InputGroup>
               </FormGroup>
@@ -102,7 +102,7 @@ const Login = () => {
                     type="password"
                     autoComplete="new-password"
                     value={loginForm.password}
-                    onChange={(e) => setLoginForm({ password: e.target.value })}
+                    onChange={(e) => setLoginForm(ps => ({ ...ps, password: e.target.value }))}
                   />
                 </InputGroup>
               </FormGroup>
@@ -120,7 +120,7 @@ const Login = () => {
                 </label>
               </div>
               <div className="text-center">
-                <Button className="my-4" color="primary" type="button">
+                <Button className="my-4" color="primary" type="submit">
                   Sign in
                 </Button>
               </div>

@@ -143,7 +143,6 @@ const Register = () => {
           <Col xs="6">
             <a className="text-light"
               href="/auth/login"
-              onClick={(e) => e.preventDefault()}
             >
               <small>Already have account? Login</small>
             </a>

@@ -141,8 +141,7 @@ const Register = () => {
         </Card>
         <Row className="mt-3">
           <Col xs="6">
-            <a
-              className="text-light"
+            <a className="text-light"
               href="/auth/login"
               onClick={(e) => e.preventDefault()}
             >

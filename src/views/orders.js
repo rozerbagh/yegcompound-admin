@@ -1,15 +1,9 @@
 import { useEffect, useState } from "react";
-import axios from "axios"
 import {
     Badge,
     Card,
     CardHeader,
     CardFooter,
-    DropdownMenu,
-    DropdownItem,
-    UncontrolledDropdown,
-    DropdownToggle,
-    Media,
     Pagination,
     PaginationItem,
     PaginationLink,
@@ -22,7 +16,6 @@ import {
 } from "reactstrap";
 // core components
 import Header from "../components/Headers/Header";
-import { getAllOrders } from "../configs"
 import { api } from "../utils/AxiosIstance";
 const Orders = () => {
     const [orders, setOrders] = useState([]);

@@ -22,7 +22,7 @@ import {
 } from "reactstrap";
 // core components
 import Header from "../components/Headers/Header";
-import { getAllOrders } from "../server"
+import { getAllOrders } from "../configs"
 import { api } from "../utils/AxiosIstance";
 const Orders = () => {
     const [orders, setOrders] = useState([]);

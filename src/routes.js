@@ -1,6 +1,6 @@
 import Index from "./views/Index";
-import Orders from "./views/orders";
-import Settings from "./views/settings"
+import Orders from "./views/Orders";
+import Settings from "./views/Settings"
 import Register from "./views/Auth/Register";
 import Login from "./views/Auth/Login";
 

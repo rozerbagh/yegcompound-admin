@@ -10,7 +10,7 @@ const App = () => {
     const dispatch = useDispatch();
     React.useEffect(() => {
         dispatch(checkAuthState());
-    })
+    }, [])
     return (
         <Switch>
             {auth.isLoggedIn ? <>

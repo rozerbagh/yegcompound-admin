@@ -30,13 +30,13 @@ const Login = () => {
   return (
     <>
       <Col lg="5" md="7">
-        <Card className="bg-secondary shadow border-0">
+        <Card className="bg-white shadow border-0">
           <CardHeader className="bg-transparent pb-5">
-            <div className="text-muted text-center mt-2 mb-3">
+            {/* <div className="text-muted text-center mt-2 mb-3">
               <small>Sign in with</small>
-            </div>
+            </div> */}
             <div className="btn-wrapper text-center">
-              <Button
+              {/* <Button
                 className="btn-neutral btn-icon"
                 color="default"
                 href="#pablo"
@@ -66,12 +66,19 @@ const Login = () => {
                   />
                 </span>
                 <span className="btn-inner--text">Google</span>
-              </Button>
+              </Button> */}
+              <img
+                alt="..."
+                width={200}
+                src={
+                  require("../../assets/img/brand/logo.png")
+                }
+              />
             </div>
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
-              <small>Or sign in with credentials</small>
+              <small>Sign in with credentials</small>
             </div>
             <Form role="form" onSubmit={handleSubmit}>
               <FormGroup className="mb-3">

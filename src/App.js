@@ -1,16 +1,16 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import AdminLayout from "./layouts/Admin.js";
-import AuthLayout from "./layouts/Auth.js";
+import AdminLayout from "./layouts/Admin";
+import AuthLayout from "./layouts/Auth";
 import { useSelector, useDispatch } from "react-redux";
-import { checkAuthState } from "./store/authSlice"
+import { checkAuthState } from "./store/authSlice";
 const App = () => {
 
     const auth = useSelector((state => state.auth));
     const dispatch = useDispatch();
     React.useEffect(() => {
         dispatch(checkAuthState());
-    }, [])
+    }, []);
     return (
         <Switch>
             {auth.isLoggedIn ? <>

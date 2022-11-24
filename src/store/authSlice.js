@@ -125,6 +125,7 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.isLoggedIn = false;
             state.user = {};
+            alert("Check Email / Password")
         },
 
         // forget password

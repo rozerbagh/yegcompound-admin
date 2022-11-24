@@ -34,8 +34,6 @@ import {
   Col
 } from "reactstrap";
 
-var ps;
-
 const Sidebar = (props) => {
   const [collapseOpen, setCollapseOpen] = useState();
   // verifies if routeName is the one active (in browser input)

@@ -9,11 +9,10 @@ const Footer = () => {
             © {new Date().getFullYear()}{" "}
             <a
               className="font-weight-bold ml-1"
-              href="#"
-              rel="noopener noreferrer"
+              href="http://yegcompounding.com"
               target="_blank"
             >
-              Lemarchand Dispensary
+              ADMIN Niks Pharmacy
             </a>
           </div>
         </Col>

@@ -1,23 +1,3 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-/*eslint-disable*/
-
-// reactstrap components
 import { NavItem, NavLink, Nav, Container, Row, Col } from "reactstrap";
 
 const Login = () => {
@@ -31,10 +11,10 @@ const Login = () => {
                 © {new Date().getFullYear()}{" "}
                 <a
                   className="font-weight-bold ml-1"
-                  href="https://www.creative-tim.com?ref=adr-auth-footer"
+                  href="http://yegcompounding.com"
                   target="_blank"
                 >
-                  Creative Tim
+                  ADMIN Niks Pharmacy
                 </a>
               </div>
             </Col>
@@ -42,15 +22,15 @@ const Login = () => {
               <Nav className="nav-footer justify-content-center justify-content-xl-end">
                 <NavItem>
                   <NavLink
-                    href="https://www.creative-tim.com?ref=adr-auth-footer"
+                    href="http://yegcompounding.com"
                     target="_blank"
                   >
-                    Creative Tim
+                    Niks Pharmacy
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink
-                    href="https://www.creative-tim.com/presentation?ref=adr-auth-footer"
+                    href="#"
                     target="_blank"
                   >
                     About Us
@@ -58,20 +38,20 @@ const Login = () => {
                 </NavItem>
                 <NavItem>
                   <NavLink
-                    href="http://blog.creative-tim.com?ref=adr-auth-footer"
+                    href="#"
                     target="_blank"
                   >
-                    Blog
+                    Terms and Conditions
                   </NavLink>
                 </NavItem>
-                <NavItem>
+                {/* <NavItem>
                   <NavLink
                     href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md?ref=adr-auth-footer"
                     target="_blank"
                   >
                     MIT License
                   </NavLink>
-                </NavItem>
+                </NavItem> */}
               </Nav>
             </Col>
           </Row>

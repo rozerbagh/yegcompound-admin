@@ -18,13 +18,13 @@ const Register = () => {
   return (
     <>
       <Col lg="6" md="8">
-        <Card className="bg-secondary shadow border-0">
+        <Card className="bg-white shadow border-0">
           <CardHeader className="bg-transparent pb-5">
-            <div className="text-muted text-center mt-2 mb-4">
+            {/* <div className="text-muted text-center mt-2 mb-4">
               <small>Sign up with</small>
-            </div>
+            </div> */}
             <div className="text-center">
-              <Button
+              {/* <Button
                 className="btn-neutral btn-icon mr-4"
                 color="default"
                 href="#pablo"
@@ -57,12 +57,19 @@ const Register = () => {
                   />
                 </span>
                 <span className="btn-inner--text">Google</span>
-              </Button>
+              </Button> */}
+              <img
+                alt="..."
+                width={200}
+                src={
+                  require("../../assets/img/brand/logo.png")
+                }
+              />
             </div>
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
-              <small>Or sign up with credentials</small>
+              <small>Sign up with credentials</small>
             </div>
             <Form role="form">
               <FormGroup>

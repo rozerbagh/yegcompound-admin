@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    #RewriteCond %{HTTP_HOST} ^www.firstchoize.com
+    #RewriteRule (.*) https://firstchoize.com/$1 [R=301,L]
+    RewriteBase /
+    Options +FollowSymLinks
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ index.html [L,QSA]
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    #RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    #RewriteCond %{REQUEST_URI} ^/404/$
+    #RewriteRule ^(.*)$ index.html [L]
+    #ErrorDocument 404 ^(.*)$ index.html [L,QSA]
+</IfModule>

@@ -2,8 +2,8 @@ import React from "react";
 import { useLocation, Route, Switch, Redirect } from "react-router-dom";
 // reactstrap components
 import { Container, Row, Col } from "reactstrap";
-import AuthFooter from "components/Footers/AuthFooter.js";
-import routes from "routes.js";
+import AuthFooter from "../components/Footers/AuthFooter";
+import routes from "../routes";
 
 const Auth = (props) => {
   const mainContent = React.useRef(null);

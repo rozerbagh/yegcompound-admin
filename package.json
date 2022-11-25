@@ -1,11 +1,11 @@
 {
-  "name": "lemarchand-admin-dashboard",
+  "name": "nikspharmacy-admin-dashboard",
   "version": "1.0.0",
-  "description": "lemarchand-description",
+  "description": "nikspharmacy-description",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/creativetimofficial/argon-dashboard-react.git"
+    "url": "http://yegcompounding.com"
   },
   "keywords": [
     "react",
@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/creativetimofficial/argon-dashboard-react/issues"
   },
-  "homepage": "http://143.244.128.159:4000/",
+  "homepage": "https://yegcompounding.com",
   "scripts": {
     "start": "set PORT=4000 && react-scripts start",
     "build": "react-scripts build",

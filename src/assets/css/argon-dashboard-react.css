@@ -4064,7 +4064,7 @@ input[type="button"].btn-block {
   ~ .custom-control-label::before {
   border-color: #5e72e4;
   background-color: #5e72e4;
-  box-shadow: ;
+  /* box-shadow: ; */
 }
 
 .custom-checkbox
@@ -4322,6 +4322,13 @@ input[type="button"].btn-block {
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
   appearance: none;
+}
+.loader-wrapper{
+  width: 400px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 @media (prefers-reduced-motion: reduce) {
   .custom-range::-moz-range-thumb {

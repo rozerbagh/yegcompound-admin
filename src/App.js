@@ -1,11 +1,11 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import AdminLayout from "./layouts/Admin";
 import AuthLayout from "./layouts/Auth";
 import { useSelector, useDispatch } from "react-redux";
 import { checkAuthState } from "./store/authSlice";
 const App = () => {
-
+    const history = useHistory();
     const auth = useSelector((state => state.auth));
     const dispatch = useDispatch();
     React.useEffect(() => {

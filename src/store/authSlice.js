@@ -14,6 +14,7 @@ const initialState = {
     // forget password
     isEmailSent: false,
     successMessage: "",
+    redirectPath: null,
 };
 
 export const login = createAsyncThunk(`login`, async (body, thunkAPI) => {
@@ -112,6 +113,7 @@ const authSlice = createSlice({
                     localStorage.setItem(`user`, JSON.stringify(action?.payload));
                     state.isLoggedIn = true;
                     state.user = action?.payload;
+                    state.redirectPath = '/admin/index'
                 }
             } else {
                 localStorage.removeItem(`admintoken`);

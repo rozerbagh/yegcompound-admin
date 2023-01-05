@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link, link } from "react-router-dom"
 import {
     Badge,
     Card,
@@ -12,23 +13,34 @@ import {
     Container,
     Row,
     UncontrolledTooltip,
-    Button
+    Button,
+    Dropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
 } from "reactstrap";
+import { FiEdit, FiMoreHorizontal } from "react-icons/fi"
 // core components
 import Header from "../components/Headers/Header";
 import { api } from "../utils/AxiosIstance";
 const Orders = () => {
+    const [loading, setLoading] = useState(true);
     const [orders, setOrders] = useState([]);
     const fetchAllorders = () => {
-        api.get('/app/order/all').then(({ data }) => {
-            setOrders(data.data)
-        }).catch(error => {
-
-        })
+        setLoading(true)
+        api.get('/app/order/all')
+            .then(({ data }) => {
+                setOrders(data.data);
+                setLoading(false);
+            }).catch(error => {
+                setLoading(false);
+            })
     }
     useEffect(() => {
         fetchAllorders();
     }, [])
+    const [dropdownIndex, setDropdownIndex] = useState(-1);
+    const toggle = (idx) => dropdownIndex === idx ? setDropdownIndex(-1) : setDropdownIndex(idx);
     return (
         <>
             <Header />
@@ -110,8 +122,22 @@ const Orders = () => {
                                             </div>
                                         </td>
                                         <td className="text-right">
-                                            <Button size="small" color="info">Details</Button>
-                                            <Button size="small" type="outlined" color="info">Edit</Button>
+                                            <Dropdown isOpen={dropdownIndex === idx} toggle={() => toggle(idx)}>
+                                                <DropdownToggle>
+                                                    <FiMoreHorizontal />
+                                                </DropdownToggle>
+                                                <DropdownMenu>
+                                                    <DropdownItem>Download Invoice</DropdownItem>
+                                                    {/* <DropdownItem disabled>Action (disabled)</DropdownItem> */}
+                                                    <DropdownItem divider />
+                                                    <DropdownItem>
+                                                        <Link to={`/admin/order/${order._id}`}>
+                                                            Details
+                                                        </Link>
+                                                    </DropdownItem>
+                                                    <DropdownItem>Edit</DropdownItem>
+                                                </DropdownMenu>
+                                            </Dropdown>
                                         </td>
                                     </tr>)}
                                 </tbody>

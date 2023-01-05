@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
   Card,
@@ -26,6 +26,18 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login({ email: loginForm.email, password: loginForm.password }));
+  }
+  const handleChangeInput = (e) => {
+    // debugger
+    const { name, value } = e.target;
+    try {
+      setLoginForm(ps => ({
+        ...ps,
+        [name]: value
+      }))
+    } catch (error) {
+
+    }
   }
   return (
     <>
@@ -91,9 +103,9 @@ const Login = () => {
                   <Input
                     placeholder="Email"
                     type="email"
-                    autoComplete="new-email"
-                    value={loginForm.email}
-                    onChange={(e) => setLoginForm(ps => ({ ...ps, email: e.target.value }))}
+                    name="email"
+                    value={loginForm.email || ""}
+                    onChange={handleChangeInput}
                   />
                 </InputGroup>
               </FormGroup>
@@ -107,9 +119,10 @@ const Login = () => {
                   <Input
                     placeholder="Password"
                     type="password"
+                    name="password"
                     autoComplete="new-password"
                     value={loginForm.password}
-                    onChange={(e) => setLoginForm(ps => ({ ...ps, password: e.target.value }))}
+                    onChange={handleChangeInput}
                   />
                 </InputGroup>
               </FormGroup>

@@ -1,9 +1,9 @@
-let baseurl = 'https://api.rozerbagh.com/api/v1';
+let baseurl = 'https://seal-app-mb688.ondigitalocean.app/api/v1';
 if (process.env.NODE_ENV === 'development') {
-    baseurl = 'http://localhost:3003/api/v1';
+    baseurl = 'https://seal-app-mb688.ondigitalocean.app/api/v1';
     // baseurl = 'http://3.110.157.141:3003/api/v1';
 } else {
-    baseurl = 'https://api.rozerbagh.com/api/v1';
+    baseurl = 'https://seal-app-mb688.ondigitalocean.app/api/v1';
     // baseurl = 'http://localhost:3003/api/v1';
 }
 export const baseURL = baseurl

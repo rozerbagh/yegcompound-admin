@@ -12,8 +12,9 @@ const Footer = () => {
               className="font-weight-bold ml-1"
               href="http://yegcompounding.com"
               target="_blank"
+              rel="noreferrer"
             >
-              ADMIN Niks Pharmacy
+              ADMIN The Medicine Shoppe Pharmacy #377
             </a>
           </div>
         </Col>

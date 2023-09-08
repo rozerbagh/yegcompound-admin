@@ -1,10 +1,11 @@
 import Index from "./views/Index";
 import Orders from "./views/orders";
 import OrderDetails from "./views/Orders/OrderDetails";
-import Settings from "./views/settings"
+import Settings from "./views/settings";
 import Register from "./views/Auth/Register";
 import Login from "./views/Auth/Login";
 import Users from "./views/Users";
+import Ingredients from "./views/ingridients";
 
 var routes = [
   {
@@ -48,6 +49,14 @@ var routes = [
     layout: "/admin",
     showInSidebar: true,
   },
+  {
+    path: "/ingredients",
+    name: "Ingredients",
+    icon: "ni ni-tv-2 text-primary",
+    component: Ingredients,
+    layout: "/admin",
+    showInSidebar: true,
+  },
   // {
   //   path: "/icons",
   //   name: "Icons",
@@ -85,14 +94,14 @@ var routes = [
     name: "Login",
     icon: "ni ni-key-25 text-info",
     component: Login,
-    layout: "/auth"
+    layout: "/auth",
   },
   {
     path: "/register",
     name: "Register",
     icon: "ni ni-circle-08 text-pink",
     component: Register,
-    layout: "/auth"
-  }
+    layout: "/auth",
+  },
 ];
 export default routes;

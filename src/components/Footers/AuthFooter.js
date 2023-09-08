@@ -14,34 +14,26 @@ const Login = () => {
                   className="font-weight-bold ml-1"
                   href="http://yegcompounding.com"
                   target="_blank"
+                  rel="noreferrer"
                 >
-                  ADMIN Niks Pharmacy
+                  ADMIN The Medicine Shoppe Pharmacy #377
                 </a>
               </div>
             </Col>
             <Col xl="6">
               <Nav className="nav-footer justify-content-center justify-content-xl-end">
                 <NavItem>
-                  <NavLink
-                    href="http://yegcompounding.com"
-                    target="_blank"
-                  >
-                    Niks Pharmacy
+                  <NavLink href="http://yegcompounding.com" target="_blank">
+                    The Medicine Shoppe Pharmacy #377
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink
-                    href="#"
-                    target="_blank"
-                  >
+                  <NavLink href="#" target="_blank">
                     About Us
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink
-                    href="#"
-                    target="_blank"
-                  >
+                  <NavLink href="#" target="_blank">
                     Terms and Conditions
                   </NavLink>
                 </NavItem>

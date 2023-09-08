@@ -1,7 +1,7 @@
 {
-  "name": "nikspharmacy-admin-dashboard",
+  "name": "the-medicine-shoppe-pharmacy",
   "version": "1.0.0",
-  "description": "nikspharmacy-description",
+  "description": "the-medicine-shoppe-pharmacy",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -22,9 +22,9 @@
   "bugs": {
     "url": "https://github.com/creativetimofficial/argon-dashboard-react/issues"
   },
-  "homepage": "https://yegcompounding.com",
+  "homepage": "https://admin.yegcompounding.com",
   "scripts": {
-    "start": "set PORT=4000 && react-scripts start",
+    "start": "PORT=4000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

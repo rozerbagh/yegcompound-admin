@@ -14,7 +14,7 @@ const Footer = () => {
               target="_blank"
               rel="noreferrer"
             >
-              ADMIN The Medicine Shoppe Pharmacy #377
+              The Medicine Shoppe Pharmacy #377
             </a>
           </div>
         </Col>

@@ -13,7 +13,7 @@ import {
   InputGroupText,
   InputGroup,
   Row,
-  Col
+  Col,
 } from "reactstrap";
 import { login } from "../../store/authSlice";
 
@@ -21,24 +21,23 @@ const Login = () => {
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
-  })
+  });
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login({ email: loginForm.email, password: loginForm.password }));
-  }
+  };
   const handleChangeInput = (e) => {
     // debugger
     const { name, value } = e.target;
     try {
-      setLoginForm(ps => ({
+      setLoginForm((ps) => ({
         ...ps,
-        [name]: value
-      }))
-    } catch (error) {
-
-    }
-  }
+        [name]: value,
+      }));
+    } catch (error) {}
+  };
   return (
     <>
       <Col lg="5" md="7">
@@ -48,43 +47,10 @@ const Login = () => {
               <small>Sign in with</small>
             </div> */}
             <div className="btn-wrapper text-center">
-              {/* <Button
-                className="btn-neutral btn-icon"
-                color="default"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <span className="btn-inner--icon">
-                  <img
-                    alt="..."
-                    src={"https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Facebook_f_logo_%282021%29.svg/512px-Facebook_f_logo_%282021%29.svg.png?20210818083032"}
-                  />
-                </span>
-                <span className="btn-inner--text">Facebook</span>
-              </Button>
-              <Button
-                className="btn-neutral btn-icon"
-                color="default"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <span className="btn-inner--icon">
-                  <img
-                    alt="..."
-                    src={
-                      require("../../assets/img/icons/common/google.svg")
-                        .default
-                    }
-                  />
-                </span>
-                <span className="btn-inner--text">Google</span>
-              </Button> */}
               <img
                 alt="..."
                 width={200}
-                src={
-                  require("../../assets/img/brand/logo.png")
-                }
+                src={require("../../assets/img/brand/logo.png")}
               />
             </div>
           </CardHeader>
@@ -118,7 +84,7 @@ const Login = () => {
                   </InputGroupAddon>
                   <Input
                     placeholder="Password"
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     name="password"
                     autoComplete="new-password"
                     value={loginForm.password}
@@ -128,15 +94,13 @@ const Login = () => {
               </FormGroup>
               <div className="custom-control custom-control-alternative custom-checkbox">
                 <input
+                  onChange={(e) => setShowPassword(e.target.checked)}
                   className="custom-control-input"
-                  id=" customCheckLogin"
+                  id="showPassword"
                   type="checkbox"
                 />
-                <label
-                  className="custom-control-label"
-                  htmlFor=" customCheckLogin"
-                >
-                  <span className="text-muted">Remember me</span>
+                <label className="custom-control-label" htmlFor="showPassword">
+                  <span className="text-muted">Show Password</span>
                 </label>
               </div>
               <div className="text-center">
@@ -161,7 +125,7 @@ const Login = () => {
             <Link
               className="text-light"
               to="/auth/register"
-            // onClick={(e) => e.preventDefault()}
+              // onClick={(e) => e.preventDefault()}
             >
               <small>Create new account</small>
             </Link>

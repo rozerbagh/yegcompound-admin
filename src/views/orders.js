@@ -1,205 +1,89 @@
-import React, { useEffect, useState } from "react";
-import { Link, link } from "react-router-dom"
+import React from "react";
 import {
-    Badge,
-    Card,
-    CardHeader,
-    CardFooter,
-    Pagination,
-    PaginationItem,
-    PaginationLink,
-    Progress,
-    Table,
-    Container,
-    Row,
-    UncontrolledTooltip,
-    Button,
-    Dropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
+  Card,
+  CardHeader,
+  CardFooter,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+  Container,
+  Row,
 } from "reactstrap";
-import { FiEdit, FiMoreHorizontal } from "react-icons/fi"
 // core components
 import Header from "../components/Headers/Header";
-import { api } from "../utils/AxiosIstance";
+import OrderTable from "./Orders/OrderTable";
 const Orders = () => {
-    const [loading, setLoading] = useState(true);
-    const [orders, setOrders] = useState([]);
-    const fetchAllorders = () => {
-        setLoading(true)
-        api.get('/app/order/all')
-            .then(({ data }) => {
-                setOrders(data.data);
-                setLoading(false);
-            }).catch(error => {
-                setLoading(false);
-            })
-    }
-    useEffect(() => {
-        fetchAllorders();
-    }, [])
-    const [dropdownIndex, setDropdownIndex] = useState(-1);
-    const toggle = (idx) => dropdownIndex === idx ? setDropdownIndex(-1) : setDropdownIndex(idx);
-    return (
-        <>
-            <Header />
-            {/* Page content */}
-            <Container className="mt--7" fluid>
-                {/* Table */}
-                <Row>
-                    <div className="col">
-                        <Card className="shadow">
-                            <CardHeader className="border-0">
-                                <h3 className="mb-0">Orders</h3>
-                            </CardHeader>
-                            <Table className="align-items-center table-flush" responsive>
-                                <thead className="thead-light">
-                                    <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Product</th>
-                                        <th scope="col">Total Price</th>
-                                        <th scope="col">Paid Price</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">User</th>
-                                        <th scope="col">Completion</th>
-                                        <th scope="col" />
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {orders.length > 0 && orders.map((order, idx) => <tr>
-                                        <th scope="row">
-                                            <h3>
-                                                {order._id.substring(order._id.length - 6, order._id.length).toUpperCase()}
-                                            </h3>
-                                        </th>
-                                        <td>{order.compound_name} - {order.quantity}&nbsp;{order.quantity_unit}</td>
-                                        <td>${order.total_price.toFixed(2)}</td>
-                                        <td>${order.need_to_pay.toFixed(2)}</td>
-                                        <td>
-                                            <Badge color="" className="badge-dot mr-4">
-                                                <i className={
-                                                    order.status === 'ordered' ? "bg-warning" :
-                                                        order.status === 'dispatched' ? "bg-info" :
-                                                            order.status === 'shipped' ? "bg-primary" :
-                                                                "bg-success"
-                                                } />
-                                                {order.status}
-                                            </Badge>
-                                        </td>
-                                        <td>
-                                            <div className="avatar-group">
-                                                <div
-                                                    className="avatar avatar-sm"
-                                                    href="#pablo"
-                                                    id="tooltip742438047"
-                                                >
-                                                    <img
-                                                        alt="user"
-                                                        className="rounded-circle"
-                                                        src={require("../assets/img/theme/user.png")}
-                                                    />
-                                                </div>
-                                                <UncontrolledTooltip
-                                                    delay={0}
-                                                    target="tooltip742438047"
-                                                >
-                                                    {order?.user.fullname}
-                                                </UncontrolledTooltip>
-
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="d-flex align-items-center">
-                                                <span className="mr-2">60%</span>
-                                                <div>
-                                                    <Progress
-                                                        max="100"
-                                                        value="60"
-                                                        barClassName="bg-primary"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="text-right">
-                                            <Dropdown isOpen={dropdownIndex === idx} toggle={() => toggle(idx)}>
-                                                <DropdownToggle>
-                                                    <FiMoreHorizontal />
-                                                </DropdownToggle>
-                                                <DropdownMenu>
-                                                    <DropdownItem>Download Invoice</DropdownItem>
-                                                    {/* <DropdownItem disabled>Action (disabled)</DropdownItem> */}
-                                                    <DropdownItem divider />
-                                                    <DropdownItem>
-                                                        <Link to={`/admin/order/${order._id}`}>
-                                                            Details
-                                                        </Link>
-                                                    </DropdownItem>
-                                                    <DropdownItem>Edit</DropdownItem>
-                                                </DropdownMenu>
-                                            </Dropdown>
-                                        </td>
-                                    </tr>)}
-                                </tbody>
-                            </Table>
-                            <CardFooter className="py-4">
-                                <nav aria-label="...">
-                                    <Pagination
-                                        className="pagination justify-content-end mb-0"
-                                        listClassName="justify-content-end mb-0"
-                                    >
-                                        <PaginationItem className="disabled">
-                                            <PaginationLink
-                                                href="#pablo"
-                                                onClick={(e) => e.preventDefault()}
-                                                tabIndex="-1"
-                                            >
-                                                <i className="fas fa-angle-left" />
-                                                <span className="sr-only">Previous</span>
-                                            </PaginationLink>
-                                        </PaginationItem>
-                                        <PaginationItem className="active">
-                                            <PaginationLink
-                                                href="#pablo"
-                                                onClick={(e) => e.preventDefault()}
-                                            >
-                                                1
-                                            </PaginationLink>
-                                        </PaginationItem>
-                                        <PaginationItem>
-                                            <PaginationLink
-                                                href="#pablo"
-                                                onClick={(e) => e.preventDefault()}
-                                            >
-                                                2 <span className="sr-only">(current)</span>
-                                            </PaginationLink>
-                                        </PaginationItem>
-                                        <PaginationItem>
-                                            <PaginationLink
-                                                href="#pablo"
-                                                onClick={(e) => e.preventDefault()}
-                                            >
-                                                3
-                                            </PaginationLink>
-                                        </PaginationItem>
-                                        <PaginationItem>
-                                            <PaginationLink
-                                                href="#pablo"
-                                                onClick={(e) => e.preventDefault()}
-                                            >
-                                                <i className="fas fa-angle-right" />
-                                                <span className="sr-only">Next</span>
-                                            </PaginationLink>
-                                        </PaginationItem>
-                                    </Pagination>
-                                </nav>
-                            </CardFooter>
-                        </Card>
-                    </div>
-                </Row>
-            </Container>
-        </>
-    );
+  return (
+    <>
+      <Header />
+      {/* Page content */}
+      <Container className="mt--7" fluid>
+        {/* Table */}
+        <Row>
+          <div className="col">
+            <Card className="shadow">
+              <CardHeader className="border-0">
+                <h3 className="mb-0">Orders</h3>
+              </CardHeader>
+              <OrderTable />
+              <CardFooter className="py-4">
+                <nav aria-label="...">
+                  <Pagination
+                    className="pagination justify-content-end mb-0"
+                    listClassName="justify-content-end mb-0"
+                  >
+                    <PaginationItem className="disabled">
+                      <PaginationLink
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                        tabIndex="-1"
+                      >
+                        <i className="fas fa-angle-left" />
+                        <span className="sr-only">Previous</span>
+                      </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem className="active">
+                      <PaginationLink
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        1
+                      </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        2 <span className="sr-only">(current)</span>
+                      </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        3
+                      </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        <i className="fas fa-angle-right" />
+                        <span className="sr-only">Next</span>
+                      </PaginationLink>
+                    </PaginationItem>
+                  </Pagination>
+                </nav>
+              </CardFooter>
+            </Card>
+          </div>
+        </Row>
+      </Container>
+    </>
+  );
 };
 
 export default Orders;

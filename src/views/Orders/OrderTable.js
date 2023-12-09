@@ -13,6 +13,7 @@ import {
 } from "reactstrap";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { api } from "../../utils/AxiosIstance";
+import { orderStatusFlags } from "../../utils";
 const OrderTable = () => {
   const [loading, setLoading] = useState(true);
   const [orders, setOrderTable] = useState([]);
@@ -76,11 +77,11 @@ const OrderTable = () => {
                           <i
                             className={`
                               ${
-                                order.status === "ordered"
+                                order.status === orderStatusFlags.pending
                                   ? "bg-warning"
-                                  : order.status === "dispatched"
+                                  : order.status === orderStatusFlags.processing
                                   ? "bg-info"
-                                  : order.status === "shipped"
+                                  : order.status === orderStatusFlags.dispatched
                                   ? "bg-primary"
                                   : "bg-success"
                               }
@@ -131,8 +132,14 @@ const OrderTable = () => {
                             <FiMoreHorizontal />
                           </DropdownToggle>
                           <DropdownMenu>
-                            <DropdownItem>Download Invoice</DropdownItem>
-                            {/* <DropdownItem disabled>Action (disabled)</DropdownItem> */}
+                            {/* <DropdownItem>
+                              <Link
+                                to={`/admin/order/${order._id}?downlaoad=true`}
+                              >
+                                Download Invoice
+                              </Link>
+                            </DropdownItem> */}
+
                             <DropdownItem divider />
                             <DropdownItem>
                               <Link to={`/admin/order/${order._id}`}>

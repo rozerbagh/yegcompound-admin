@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation, Route, Switch, Redirect } from "react-router-dom";
 // reactstrap components
 import { Container } from "reactstrap";
@@ -14,6 +14,7 @@ const Admin = (props) => {
   const location = useLocation();
 
   React.useEffect(() => {
+    console.log(location);
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     mainContent.current.scrollTop = 0;
@@ -48,6 +49,11 @@ const Admin = (props) => {
     return "Brand";
   };
 
+  useEffect(() => {
+    localStorage.setItem("pathname", window.location.pathname);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [window.location.pathname]);
+
   return (
     <>
       <Sidebar
@@ -66,6 +72,7 @@ const Admin = (props) => {
         />
         <Switch>
           {getRoutes(routes)}
+          <Redirect from="*" to={localStorage.getItem("pathname")} />
           <Redirect from="*" to="/admin/index" />
         </Switch>
         <Container fluid>

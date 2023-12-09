@@ -20,7 +20,7 @@
   "author": "rozer",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/creativetimofficial/argon-dashboard-react/issues"
+    "url": "https://admin.yegcompounding.com"
   },
   "homepage": "https://admin.yegcompounding.com",
   "scripts": {
@@ -50,6 +50,8 @@
     "bootstrap": "4.6.0",
     "chart.js": "2.9.4",
     "classnames": "2.3.1",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "moment": "2.29.4",
     "nouislider": "15.2.0",
     "react": ">=16.0.0",

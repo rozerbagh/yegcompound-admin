@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { PDFDownloadLink } from "@react-pdf/renderer";
+// import { PDFDownloadLink } from "@react-pdf/renderer";
 import {
   Card,
   CardHeader,
@@ -15,12 +15,14 @@ import {
 
 import { IoCloudDownloadOutline } from "react-icons/io5";
 // core components
-import InvoiceForDownload from "./InvoiceForDownload";
+// import InvoiceForDownload from "./InvoiceForDownload";
 import UpdateStatus from "../../components/Elements/UpdateStatus";
 import Header from "../../components/Headers/Header";
 import Loader from "../../components/Loader/Loader";
 import { api } from "../../utils/AxiosIstance";
 import { orderStatus } from "../../utils/index";
+
+import { generatePDF } from "../../utils/download_invoice";
 const OrdersDetails = () => {
   const { orderid } = useParams();
   const reportTemplateRef = useRef(null);
@@ -46,8 +48,8 @@ const OrdersDetails = () => {
     api
       .patch("/app/order/update/" + orderid, { status: status })
       .then(({ data }) => {
-        console.log(data);
         alert(data.message);
+        window.location.reload();
       })
       .catch((err) => {});
   };
@@ -58,13 +60,13 @@ const OrdersDetails = () => {
       {/* Page content */}
       <Container fluid>
         {/* Table */}
-        <Row>
+        <Row ref={reportTemplateRef}>
           <div className="col">
             {loading ? (
               <Loader />
             ) : (
-              ordersDetails !== null && (
-                <Card className="card-profile shadow" ref={reportTemplateRef}>
+              ordersDetails && (
+                <Card className="card-profile shadow" id="invoice-div">
                   <Row className="justify-content-center">
                     <Col className="order-lg-2" lg="3">
                       <div className="card-profile-image">
@@ -80,8 +82,19 @@ const OrdersDetails = () => {
                   </Row>
                   <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                     <div className="d-flex justify-content-between">
-                      <PDFDownloadLink
+                      <Button
+                        className=""
+                        size="sm"
+                        onClick={() => generatePDF(ordersDetails)}
+                      >
+                        Download Invoice
+                        <span className="ml-2 text-base">
+                          <IoCloudDownloadOutline />
+                        </span>
+                      </Button>
+                      {/* <PDFDownloadLink
                         document={<InvoiceForDownload data={ordersDetails} />}
+                        // eslint-disable-next-line no-useless-concat
                         fileName={"Invoice" + "-" + new Date().getTime()}
                       >
                         {({ blob, url, loading, error }) =>
@@ -96,9 +109,9 @@ const OrdersDetails = () => {
                             </Button>
                           )
                         }
-                      </PDFDownloadLink>
+                      </PDFDownloadLink> */}
 
-                      <Button
+                      {/* <Button
                         className="float-right"
                         color="default"
                         href="#pablo"
@@ -106,7 +119,7 @@ const OrdersDetails = () => {
                         size="sm"
                       >
                         Send Email
-                      </Button>
+                      </Button> */}
                     </div>
                   </CardHeader>
                   <CardBody className="pt-0 mt-5">

@@ -3,7 +3,7 @@
   publish = "build"          # Specify the directory to publish after building
 
 [build.environment]
-  NODE_VERSION = "18.19.0"  # Set Node.js version
+  NODE_VERSION = "16.0.0"  # Set Node.js version
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"  # Add any necessary plugins

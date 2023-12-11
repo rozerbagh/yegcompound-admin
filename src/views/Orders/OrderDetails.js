@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-// import { PDFDownloadLink } from "@react-pdf/renderer";
 import {
   Card,
   CardHeader,
@@ -14,8 +13,6 @@ import {
 } from "reactstrap";
 
 import { IoCloudDownloadOutline } from "react-icons/io5";
-// core components
-// import InvoiceForDownload from "./InvoiceForDownload";
 import UpdateStatus from "../../components/Elements/UpdateStatus";
 import Header from "../../components/Headers/Header";
 import Loader from "../../components/Loader/Loader";

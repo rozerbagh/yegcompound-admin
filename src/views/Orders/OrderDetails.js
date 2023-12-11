@@ -92,24 +92,6 @@ const OrdersDetails = () => {
                           <IoCloudDownloadOutline />
                         </span>
                       </Button>
-                      {/* <PDFDownloadLink
-                        document={<InvoiceForDownload data={ordersDetails} />}
-                        // eslint-disable-next-line no-useless-concat
-                        fileName={"Invoice" + "-" + new Date().getTime()}
-                      >
-                        {({ blob, url, loading, error }) =>
-                          loading ? (
-                            "Loading..."
-                          ) : (
-                            <Button className="" size="sm">
-                              Download Invoice{" "}
-                              <span className="ml-2 text-base">
-                                <IoCloudDownloadOutline />
-                              </span>
-                            </Button>
-                          )
-                        }
-                      </PDFDownloadLink> */}
 
                       {/* <Button
                         className="float-right"

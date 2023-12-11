@@ -1,0 +1,14 @@
+[build]
+  command = "npm run build"  # Specify your build command here
+  publish = "build"          # Specify the directory to publish after building
+
+[build.environment]
+  NODE_VERSION = "18.19.0"  # Set Node.js version
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"  # Add any necessary plugins
+
+[build.lifecycle]
+  # Custom build steps
+  before_build = "npm install --force"  # Install dependencies before building
+  # You can add more custom steps here

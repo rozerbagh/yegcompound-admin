@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { checkAuthState } from "./store/authSlice";
 import UserApproved from "./views/UserApproved";
 import UserDecline from "./views/UserDecline";
+import NotFound from "./views/NotFound";
 const App = () => {
   const history = useHistory();
   const auth = useSelector((state) => state.auth);
@@ -36,6 +37,7 @@ const App = () => {
       {/* <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
             <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
             <Redirect from="/" to="/admin/index" /> */}
+      <Route component={NotFound} />
     </Switch>
   );
 };

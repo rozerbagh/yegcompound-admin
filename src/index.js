@@ -14,7 +14,7 @@ import { Provider } from "react-redux";
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter basename="https://admin.yegcompounding.com/">
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </Provider>,

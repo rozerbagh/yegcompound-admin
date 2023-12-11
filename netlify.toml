@@ -6,7 +6,7 @@
   NODE_VERSION = "16.0.0"  # Set Node.js version
 
 [[plugins]]
-  package = "@netlify/plugin-nextjs"  # Add any necessary plugins
+  # package = "@netlify/plugin-nextjs"  # Add any necessary plugins
 
 [build.lifecycle]
   # Custom build steps

@@ -20,6 +20,8 @@ import { api } from "../../utils/AxiosIstance";
 import { orderStatus } from "../../utils/index";
 
 import { generatePDF } from "../../utils/download_invoice";
+import axios from "axios";
+import { sendInvoiceUrl } from "../../configs";
 const OrdersDetails = () => {
   const { orderid } = useParams();
   const reportTemplateRef = useRef(null);
@@ -49,6 +51,22 @@ const OrdersDetails = () => {
         window.location.reload();
       })
       .catch((err) => {});
+  };
+
+  const [sending, setSending] = useState(false);
+  const handleInvoiceMail = (id, userdata) => {
+    setSending(true);
+    const url = sendInvoiceUrl(id);
+    axios
+      .post(url, { invoicedata: userdata })
+      .then(({ data }) => {
+        setSending(false);
+        alert(data.message);
+      })
+      .catch((err) => {
+        setSending(false);
+        alert(err.response?.data?.message);
+      });
   };
 
   return (
@@ -90,15 +108,19 @@ const OrdersDetails = () => {
                         </span>
                       </Button>
 
-                      {/* <Button
+                      <Button
+                        disabled={sending}
                         className="float-right"
                         color="default"
                         href="#pablo"
-                        onClick={(e) => e.preventDefault()}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleInvoiceMail(ordersDetails._id, ordersDetails);
+                        }}
                         size="sm"
                       >
-                        Send Email
-                      </Button> */}
+                        {sending ? "Sending..." : "Send Email"}
+                      </Button>
                     </div>
                   </CardHeader>
                   <CardBody className="pt-0 mt-5">

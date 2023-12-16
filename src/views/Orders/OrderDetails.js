@@ -24,6 +24,7 @@ import axios from "axios";
 import { sendInvoiceUrl } from "../../configs";
 const OrdersDetails = () => {
   const { orderid } = useParams();
+  const [enableEditPay, setEnableEditPay] = useState(false);
   const reportTemplateRef = useRef(null);
   const [loading, setLoading] = useState(true);
   const [ordersDetails, setOrdersDetails] = useState(null);
@@ -43,12 +44,13 @@ const OrdersDetails = () => {
     if (orderid) fetchOrderDetails(orderid);
   }, [orderid]);
 
-  const handleUpdateStatus = (status) => {
+  const handleUpdateOrder = (details) => {
     api
-      .patch("/app/order/update/" + orderid, { status: status })
+      .patch("/app/order/update/" + orderid, { ...details })
       .then(({ data }) => {
         alert(data.message);
         window.location.reload();
+        setEnableEditPay(false);
       })
       .catch((err) => {});
   };
@@ -132,7 +134,10 @@ const OrdersDetails = () => {
                           allStatus={orderStatus}
                           status={ordersDetails.status}
                           handleStatus={(status) => {
-                            handleUpdateStatus(status);
+                            handleUpdateOrder({
+                              ...ordersDetails,
+                              status: status,
+                            });
                           }}
                         />
                       </div>
@@ -196,7 +201,29 @@ const OrdersDetails = () => {
                                   {ordersDetails.total_price.toFixed(2)}
                                 </td>
                                 <td>
-                                  Pay - {ordersDetails.need_to_pay.toFixed(2)}
+                                  {enableEditPay ? (
+                                    <input
+                                      defaultValue={ordersDetails.need_to_pay.toFixed(
+                                        2
+                                      )}
+                                      onBlur={(e) =>
+                                        handleUpdateOrder({
+                                          ...ordersDetails,
+                                          need_to_pay: e.target.value,
+                                        })
+                                      }
+                                    />
+                                  ) : (
+                                    <>
+                                      Pay -{" "}
+                                      {ordersDetails.need_to_pay.toFixed(2)}
+                                    </>
+                                  )}
+                                  <Button
+                                    onClick={() => setEnableEditPay(true)}
+                                  >
+                                    Edit the pay
+                                  </Button>
                                 </td>
                               </tr>
                             </tbody>

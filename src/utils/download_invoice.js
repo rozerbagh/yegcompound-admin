@@ -1,23 +1,26 @@
 import jsPDF from "jspdf";
 import {
   logo,
-  userdetails,
+  // userdetails,
   orderHeader,
-  clientDetails,
+  // clientDetails,
   orderTableHead,
   orderTableBody,
   orderSubTotal,
 } from "./orderPDF";
 export function createHtmlFromJSON(jsonData) {
-  console.log(jsonData);
+  // console.log(jsonData);
   const _logo = logo(jsonData);
-  const _userdetails = userdetails(jsonData);
-  let dateofinvoice = new Date(jsonData.createdAt).toISOString();
+  // const _userdetails = userdetails(jsonData);
+  let dateofinvoice = new Date(jsonData.createdAt);
+  dateofinvoice = `${dateofinvoice.getDate()}/${
+    dateofinvoice.getMonth() + 1
+  }/${dateofinvoice.getFullYear()}`;
   const _orderHeader = orderHeader({
     ...jsonData,
     dateofinvoice: dateofinvoice,
   });
-  const _clientDetails = clientDetails(jsonData);
+  // const _clientDetails = clientDetails(jsonData);
   const _orderTableHead = orderTableHead(jsonData);
   let _orderTableBody = "";
   jsonData?.ingredients.map(
@@ -39,9 +42,9 @@ export function createHtmlFromJSON(jsonData) {
           <td>`;
 
   html += _logo;
-  html += _userdetails;
+  // html += _userdetails;
   html += _orderHeader;
-  html += _clientDetails;
+  // html += _clientDetails;
   html += _orderTableHead;
   html += _orderTableBody;
   html += _orderSubTotal;

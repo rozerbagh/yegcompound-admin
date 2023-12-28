@@ -172,7 +172,7 @@ const OrdersDetails = () => {
                         </Col>
                       </Row>
                       <Row>
-                        <Col xs={12}>
+                        <Col xs={12} style={{ overflowX: "auto" }}>
                           <Table>
                             <thead className="thead-light">
                               <tr>

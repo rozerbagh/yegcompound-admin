@@ -180,7 +180,6 @@ const OrdersDetails = () => {
                                 <th scope="col">Percent % </th>
                                 <th scope="col">Pack Size</th>
                                 <th scope="col">Price / pack</th>
-                                <th scope="col" />
                               </tr>
                             </thead>
                             <tbody>
@@ -191,11 +190,10 @@ const OrdersDetails = () => {
                                     <td>{ing.percent}</td>
                                     <td>{ing.pack_size}</td>
                                     <td>{ing.price}</td>
-                                    <td></td>
                                   </tr>
                                 ))}
                               <tr>
-                                <td colSpan={3}></td>
+                                <td colSpan={12}></td>
                                 <td>
                                   Total Price -{" "}
                                   {ordersDetails.total_price.toFixed(2)}

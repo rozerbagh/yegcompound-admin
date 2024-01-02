@@ -55,7 +55,7 @@ function UserApproved() {
               <CardSubtitle className="mb-2 text-muted" tag="h6">
                 User
               </CardSubtitle>
-              <CardText>{approved.data?.message}</CardText>
+              <CardText>Approved</CardText>
               <Button
                 color="primary"
                 onClick={() => (window.location.href = "/auth/login")}

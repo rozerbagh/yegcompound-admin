@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 function AddUserForm({ open, handlClose, handleToggel, handleFormSubmit }) {
+  const adminRef = useRef(null);
   const [userDetails, setUserDetails] = useState({
     fullname: {
       name: "fullname",
@@ -19,15 +20,15 @@ function AddUserForm({ open, handlClose, handleToggel, handleFormSubmit }) {
       validfunc: (val) => {},
     },
     password: {
-      name: "paasword",
-      type: "paasword",
+      name: "password",
+      type: "password",
       placeholder: "Enter the password",
       value: "",
       valid: false,
       validfunc: (val) => {},
     },
     phoneno: {
-      name: "phone",
+      name: "phoneno",
       type: "number",
       placeholder: "Enter the phone",
       value: "",
@@ -62,6 +63,13 @@ function AddUserForm({ open, handlClose, handleToggel, handleFormSubmit }) {
             onChange={handleChange}
           />
         ))}
+        <input
+          ref={adminRef}
+          onChange={(e) => {}}
+          id="admin-checkbox"
+          type="checkbox"
+        />
+        &nbsp; Is Admin ?
       </ModalBody>
       <ModalFooter>
         <Button
@@ -70,7 +78,7 @@ function AddUserForm({ open, handlClose, handleToggel, handleFormSubmit }) {
             handleFormSubmit({
               ...userDetails,
               address: [],
-              role: 0,
+              role: adminRef.current?.checked ? 1 : 0,
               status: 0,
               image: "https://storebucket.fra1.digitaloceanspaces.com/user.png",
             })
@@ -78,7 +86,7 @@ function AddUserForm({ open, handlClose, handleToggel, handleFormSubmit }) {
         >
           Add
         </Button>{" "}
-        <Button color="secondary" onClick={handlClose}>
+        <Button color="secondary" onClick={handleToggel}>
           Cancel
         </Button>
       </ModalFooter>

@@ -22,10 +22,12 @@ import {
 import Header from "../components/Headers/Header";
 import { baseURL } from "../configs";
 import AddUserForm from "../components/Modals/AddUserForm";
-
+import UserOrderSetup from "../components/Modals/UserOrderSetup";
 const Users = () => {
   const [loading, setLoading] = useState(true);
   const [addFormOpen, setAddFormOpen] = useState(false);
+  const [userSetupFormOpen, setUserSetupFormOpen] = useState(false);
+  const [curUser, setCurUser] = useState(null);
   const [users, setUsers] = useState([]);
   const handleAddUser = (userDeatils) => {
     setLoading(true);
@@ -186,9 +188,13 @@ const Users = () => {
                               </DropdownItem>
                               <DropdownItem
                                 href="#pablo"
-                                onClick={(e) => e.preventDefault()}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setCurUser(_u);
+                                  setUserSetupFormOpen(true);
+                                }}
                               >
-                                Edit
+                                Edit Setup
                               </DropdownItem>
                               <DropdownItem
                                 href="#pablo"
@@ -265,6 +271,13 @@ const Users = () => {
           open={addFormOpen}
           handleToggel={() => setAddFormOpen((ps) => !ps)}
           handleFormSubmit={handleAddUser}
+        />
+      ) : null}
+      {userSetupFormOpen ? (
+        <UserOrderSetup
+          userid={curUser?._id}
+          open={userSetupFormOpen}
+          handleToggel={() => setUserSetupFormOpen((ps) => !ps)}
         />
       ) : null}
     </>

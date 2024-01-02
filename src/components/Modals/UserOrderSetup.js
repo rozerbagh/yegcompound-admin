@@ -15,11 +15,17 @@ import {
   InputGroupAddon,
   InputGroupText,
   Label,
+  ModalFooter,
+  ModalBody,
+  ModalHeader,
+  Modal,
 } from "reactstrap";
-// core components
-import Header from "../components/Headers/Header";
-import { api } from "../utils/AxiosIstance";
-const Settings = () => {
+import { api } from "../../utils/AxiosIstance";
+const setting_name = {
+  capsule: "capsule",
+  compound: "compound",
+};
+const Settings = ({ userId, handleToggel }) => {
   const [updateId, setUpdateId] = useState("");
   const [capsuleId, setCapsuleId] = useState("");
   const [compoundSettings, setCompoundSettings] = useState({
@@ -100,25 +106,33 @@ const Settings = () => {
   });
   const fetchSettings = () => {
     api
-      .get("/app/setting/all")
+      .get(`/app/user-setting/${userId}?admin=true`)
       .then(({ data }) => {
         console.log(data.data);
-        setUpdateId(data.data[0]._id);
         const _s = { ...compoundSettings };
-        _s.container_cost.value = data.data[0].container_cost;
-        _s.delivery_fee.value = data.data[0].delivery_fee;
-        _s.labour_hour_rate.value = data.data[0].labour_hour_rate;
-        _s.rebate.value = data.data[0].rebate;
-        _s.markup.value = data.data[0].markup;
+        const [compoundSetup] = data.data.filter(
+          (_d) => _d.setting_name === "compound"
+        );
+        console.log(compoundSetup);
+        setUpdateId(compoundSetup._id);
+        _s.container_cost.value = compoundSetup.container_cost;
+        _s.delivery_fee.value = compoundSetup.delivery_fee;
+        _s.labour_hour_rate.value = compoundSetup.labour_hour_rate;
+        _s.rebate.value = compoundSetup.rebate;
+        _s.markup.value = compoundSetup.markup;
         setCompoundSettings(_s);
 
-        setCapsuleId(data.data[1]._id);
+        const [capsuleSetup] = data.data.filter(
+          (_d) => _d.setting_name === "capsule"
+        );
+        console.log(capsuleSetup);
+        setCapsuleId(capsuleSetup._id);
         const _sC = { ...capsuleSettings };
-        _sC.container_cost.value = data.data[1].container_cost;
-        _sC.delivery_fee.value = data.data[1].delivery_fee;
-        _sC.labour_hour_rate.value = data.data[1].labour_hour_rate;
-        _sC.rebate.value = data.data[1].rebate;
-        _sC.markup.value = data.data[1].markup;
+        _sC.container_cost.value = capsuleSetup.container_cost;
+        _sC.delivery_fee.value = capsuleSetup.delivery_fee;
+        _sC.labour_hour_rate.value = capsuleSetup.labour_hour_rate;
+        _sC.rebate.value = capsuleSetup.rebate;
+        _sC.markup.value = capsuleSetup.markup;
         setCapsuleSettings(_sC);
       })
       .catch((error) => {});
@@ -154,20 +168,19 @@ const Settings = () => {
     Object.keys(compoundSettings).forEach(
       (ele) => (params[ele] = compoundSettings[ele].value)
     );
-    debugger;
     api
       .patch("/app/setting/update/" + id, params)
       .then(({ data }) => {
-        debugger;
         console.log(data.data);
+        handleToggel();
       })
-      .catch((error) => {});
+      .catch((error) => {
+        alert(error?.response?.data?.message || "Something went wrong");
+      });
   };
 
   return (
     <>
-      <Header showCard={false} />
-      {/* Page content */}
       <Container fluid>
         {/* Table */}
         <Row>
@@ -271,4 +284,25 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+function UserOrderSetup({ open, handleToggel, userid }) {
+  return (
+    <Modal isOpen={open} toggle={handleToggel}>
+      <ModalHeader toggle={handleToggel}>
+        <h1>Add user</h1>
+      </ModalHeader>
+      <ModalBody>
+        <Settings handleToggel={handleToggel} userId={userid} />
+      </ModalBody>
+      <ModalFooter>
+        {/* <Button color="primary" onClick={() => {}}>
+          Add
+        </Button>{" "} */}
+        <Button color="secondary" onClick={handleToggel}>
+          Cancel
+        </Button>
+      </ModalFooter>
+    </Modal>
+  );
+}
+
+export default UserOrderSetup;

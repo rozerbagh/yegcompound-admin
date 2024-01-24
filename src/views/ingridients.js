@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import {
   Card,
   CardHeader,
-  CardFooter,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
+  // CardFooter,
+  // Pagination,
+  // PaginationItem,
+  // PaginationLink,
   Table,
   Container,
   Row,
@@ -333,6 +333,7 @@ const Ingredients = () => {
           </Container>
           {addModal ? (
             <AddIngredients
+              fetchAllIngredients={fetchAllIngredients}
               open={addModal}
               handleToggle={handleToggle}
               ing_type={tableType}
@@ -340,6 +341,7 @@ const Ingredients = () => {
           ) : null}
           {openEditModal ? (
             <EditIngredients
+              fetchAllIngredients={fetchAllIngredients}
               ingredient={editDetails}
               open={openEditModal}
               handleToggle={() => setOpenEditModal((ps) => !ps)}

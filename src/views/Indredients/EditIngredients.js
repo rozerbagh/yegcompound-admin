@@ -5,7 +5,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Form,
+  // Form,
   FormGroup,
   Label,
   Input,
@@ -17,6 +17,7 @@ function EditIngredients({
   handleToggle,
   ing_type,
   ingredient,
+  fetchAllIngredients,
   ...args
 }) {
   console.log(ing_type);
@@ -43,6 +44,7 @@ function EditIngredients({
       .then(({ data }) => {
         alert(data.message);
         handleToggle();
+        fetchAllIngredients();
       })
       .catch((err) => {
         alert("Something went wrong");

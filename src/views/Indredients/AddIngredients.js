@@ -5,14 +5,20 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Form,
+  // Form,
   FormGroup,
   Label,
   Input,
 } from "reactstrap";
 import { api } from "../../utils/AxiosIstance";
 
-function AddIngredients({ open, handleToggle, ing_type, ...args }) {
+function AddIngredients({
+  open,
+  handleToggle,
+  ing_type,
+  fetchAllIngredients,
+  ...args
+}) {
   console.log(ing_type);
   const [formDetails, setFormDetails] = useState({
     name: "",
@@ -26,6 +32,7 @@ function AddIngredients({ open, handleToggle, ing_type, ...args }) {
         console.log(data);
         alert("successfully addeed");
         handleToggle();
+        fetchAllIngredients();
       })
       .catch((error) => {
         alert(error.toString());

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Modal,
@@ -12,23 +12,40 @@ import {
 } from "reactstrap";
 import { api } from "../../utils/AxiosIstance";
 
-function AddIngredients({ open, handleToggle, ing_type, ...args }) {
+function EditIngredients({
+  open,
+  handleToggle,
+  ing_type,
+  ingredient,
+  ...args
+}) {
   console.log(ing_type);
   const [formDetails, setFormDetails] = useState({
     name: "",
     pack_size: "",
     price: "",
   });
-  const handleSubmit = (bodydata) => {
+  useEffect(() => {
+    if (ingredient) {
+      setFormDetails({
+        name: ingredient.name,
+        pack_size: ingredient.pack_size,
+        price: ingredient.price,
+      });
+    }
+  }, [ingredient]);
+  const handleSubmit = (ingredient) => {
     api
-      .post("/app/ingredients/add", { ...bodydata, ing_type: ing_type })
+      .patch(`/app/ingredients/update/${ingredient.id}`, {
+        ...ingredient,
+        ing_type: ing_type,
+      })
       .then(({ data }) => {
-        console.log(data);
-        alert("successfully addeed");
+        alert(data.message);
         handleToggle();
       })
-      .catch((error) => {
-        alert(error.toString());
+      .catch((err) => {
+        alert("Something went wrong");
       });
   };
 
@@ -38,7 +55,7 @@ function AddIngredients({ open, handleToggle, ing_type, ...args }) {
   };
   return (
     <Modal isOpen={open} toggle={handleToggle} {...args}>
-      <ModalHeader toggle={handleToggle}>Add Ingredient</ModalHeader>
+      <ModalHeader toggle={handleToggle}>Edit Ingredient</ModalHeader>
       <ModalBody>
         <FormGroup>
           <Label for="name">Name of Ingredient</Label>
@@ -79,11 +96,11 @@ function AddIngredients({ open, handleToggle, ing_type, ...args }) {
           Cancel
         </Button>{" "}
         <Button color="primary" onClick={() => handleSubmit(formDetails)}>
-          Add
+          Update
         </Button>
       </ModalFooter>
     </Modal>
   );
 }
 
-export default AddIngredients;
+export default EditIngredients;

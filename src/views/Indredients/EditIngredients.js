@@ -37,7 +37,7 @@ function EditIngredients({
   }, [ingredient]);
   const handleSubmit = (ingredient) => {
     api
-      .patch(`/app/ingredients/update/${ingredient.id}`, {
+      .patch(`/app/ingredients/update/${ingredient._id}`, {
         ...ingredient,
         ing_type: ing_type,
       })

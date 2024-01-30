@@ -97,7 +97,10 @@ function EditIngredients({
         <Button color="secondary" onClick={handleToggle}>
           Cancel
         </Button>{" "}
-        <Button color="primary" onClick={() => handleSubmit(formDetails)}>
+        <Button
+          color="primary"
+          onClick={() => handleSubmit({ ...ingredient, ...formDetails })}
+        >
           Update
         </Button>
       </ModalFooter>
